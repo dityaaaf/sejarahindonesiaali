@@ -1,4 +1,5 @@
-import { BookOpen, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
+import logoImg from '../assets/indonesialogo.png';
 
 interface Props {
   isDark: boolean;
@@ -23,8 +24,8 @@ export default function Footer({ isDark }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 flex items-center justify-center bg-white/10 p-1.5 rounded-xl">
+                <img src={logoImg} alt="Logo Sejarah Indonesia" className="w-full h-full object-contain" />
               </div>
               <div>
                 <span className="text-white font-bold text-lg leading-none block">Sejarah Indonesia</span>

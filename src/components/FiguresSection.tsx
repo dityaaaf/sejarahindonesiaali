@@ -19,9 +19,19 @@ function FigureModal({ figure, isDark, onClose }: { figure: HistoricalFigure; is
         className={`relative w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl ${isDark ? 'bg-gray-800' : 'bg-white'} max-h-[90vh] overflow-y-auto`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="h-32 flex items-center justify-center relative" style={{ backgroundColor: figure.bgColor }}>
-          <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center border-4 border-white/30">
-            <span className="text-white text-3xl font-bold">{figure.initial}</span>
+        <div 
+          className="h-32 flex items-center justify-center relative bg-cover bg-center" 
+          style={{ 
+            backgroundColor: figure.bgColor,
+            backgroundImage: figure.imageUrl ? `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url(${figure.imageUrl})` : undefined
+          }}
+        >
+          <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center border-4 border-white/30 overflow-hidden">
+            {figure.imageUrl ? (
+              <img src={figure.imageUrl} alt={figure.name} className="w-full h-full object-cover" />
+            ) : (
+              <span className="text-white text-3xl font-bold">{figure.initial}</span>
+            )}
           </div>
           <button
             onClick={onClose}
@@ -108,14 +118,24 @@ export default function FiguresSection({ isDark, searchQuery }: Props) {
               style={{ animationDelay: `${idx * 0.1}s` }}
               onClick={() => setSelected(figure)}
             >
-              <div className="h-36 flex flex-col items-center justify-end pb-4 relative" style={{ backgroundColor: figure.bgColor }}>
+              <div 
+                className="h-36 flex flex-col items-center justify-end pb-4 relative bg-cover bg-center" 
+                style={{ 
+                  backgroundColor: figure.bgColor,
+                  backgroundImage: figure.imageUrl ? `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url(${figure.imageUrl})` : undefined
+                }}
+              >
                 <div className="absolute inset-0 opacity-10">
                   <div className="w-full h-full" style={{
                     backgroundImage: 'radial-gradient(circle at 30% 50%, white 0%, transparent 60%), radial-gradient(circle at 70% 20%, white 0%, transparent 50%)'
                   }} />
                 </div>
-                <div className="relative w-16 h-16 rounded-full bg-white/25 border-3 border-white/40 flex items-center justify-center">
-                  <span className="text-white text-2xl font-bold">{figure.initial}</span>
+                <div className="relative w-16 h-16 rounded-full bg-white/25 border-3 border-white/40 flex items-center justify-center overflow-hidden">
+                  {figure.imageUrl ? (
+                    <img src={figure.imageUrl} alt={figure.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-white text-2xl font-bold">{figure.initial}</span>
+                  )}
                 </div>
               </div>
 

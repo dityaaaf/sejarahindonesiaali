@@ -1,3 +1,10 @@
+import soekarnoImg from '../assets/image/soekarno.jpg';
+import hattaImg from '../assets/image/drhatta.jpg';
+import sudirmanImg from '../assets/image/jendralsudirman.png';
+import kartiniImg from '../assets/image/kartini.png';
+import diponegoroImg from '../assets/image/diponegoro.png';
+import cutnyakImg from '../assets/image/cutnyak.png';
+
 export interface HistoricalFigure {
   id: string;
   name: string;
@@ -10,6 +17,7 @@ export interface HistoricalFigure {
   funFact: string;
   initial: string;
   bgColor: string;
+  imageUrl?: string;
 }
 
 export const figuresData: HistoricalFigure[] = [
@@ -33,6 +41,7 @@ export const figuresData: HistoricalFigure[] = [
       'Soekarno bisa berbicara dalam 8 bahasa: Indonesia, Inggris, Belanda, Prancis, Jerman, Arab, Jepang, dan Jawa.',
     initial: 'S',
     bgColor: '#DC2626',
+    imageUrl: soekarnoImg,
   },
   {
     id: 'hatta',
@@ -54,6 +63,7 @@ export const figuresData: HistoricalFigure[] = [
       'Hatta dikenal sangat sederhana. Ia punya kebiasaan mencatat setiap pengeluaran, bahkan sampai satu sen pun.',
     initial: 'H',
     bgColor: '#1d4ed8',
+    imageUrl: hattaImg,
   },
   {
     id: 'sudirman',
@@ -75,6 +85,7 @@ export const figuresData: HistoricalFigure[] = [
       'Sudirman memimpin perang gerilya selama 7 bulan sambil ditandu karena penyakit paru-parunya yang parah. Ia menempuh jarak ratusan kilometer di hutan Jawa.',
     initial: 'SD',
     bgColor: '#065f46',
+    imageUrl: sudirmanImg,
   },
   {
     id: 'kartini',
@@ -96,6 +107,7 @@ export const figuresData: HistoricalFigure[] = [
       'Kartini belajar bahasa Belanda secara mandiri dan surat-suratnya kepada Rosa Abendanon dan Stella Zeehandelaar menjadi bukti kecerdasan dan keberaniannya.',
     initial: 'K',
     bgColor: '#9d174d',
+    imageUrl: kartiniImg,
   },
   {
     id: 'diponegoro',
@@ -117,6 +129,7 @@ export const figuresData: HistoricalFigure[] = [
       'Belanda menawarkan hadiah 50.000 gulden bagi siapa pun yang bisa menangkap Diponegoro — jumlah yang sangat besar pada masa itu.',
     initial: 'DP',
     bgColor: '#92400e',
+    imageUrl: diponegoroImg,
   },
   {
     id: 'cut-nyak-dien',
@@ -138,5 +151,6 @@ export const figuresData: HistoricalFigure[] = [
       'Cut Nyak Dien ditangkap Belanda pada 1905 dalam kondisi sakit parah, namun ia menolak diperlakukan sebagai tawanan biasa. Ia wafat dalam pengasingan di Sumedang, Jawa Barat.',
     initial: 'CN',
     bgColor: '#7c3aed',
+    imageUrl: cutnyakImg,
   },
 ];

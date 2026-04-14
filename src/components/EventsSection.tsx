@@ -19,20 +19,25 @@ function EventModal({ event, isDark, onClose }: { event: HistoricalEvent; isDark
         className={`relative w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl ${isDark ? 'bg-gray-800' : 'bg-white'} max-h-[90vh] overflow-y-auto`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={`bg-gradient-to-r ${event.bgGradient} p-8 relative`}>
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 bg-black/30 hover:bg-black/50 rounded-full flex items-center justify-center transition-colors"
-          >
-            <X className="w-4 h-4 text-white" />
-          </button>
-          <span className={`text-xs font-bold px-3 py-1 rounded-full bg-white/20 text-white mb-3 inline-block`}>
-            {event.category}
-          </span>
-          <h3 className="text-2xl font-bold text-white">{event.title}</h3>
-          <div className="flex items-center gap-2 mt-2 text-white/70 text-sm">
-            <Calendar className="w-4 h-4" />
-            <span>{event.date}</span>
+        <div className={`bg-gradient-to-r ${event.bgGradient} p-8 relative overflow-hidden`}>
+          {event.image && (
+            <img src={event.image} alt={event.title} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
+          )}
+          <div className="relative z-10">
+            <button
+              onClick={onClose}
+              className="absolute top-0 right-0 w-8 h-8 bg-black/30 hover:bg-black/50 rounded-full flex items-center justify-center transition-colors"
+            >
+              <X className="w-4 h-4 text-white" />
+            </button>
+            <span className={`text-xs font-bold px-3 py-1 rounded-full bg-white/20 text-white mb-3 inline-block`}>
+              {event.category}
+            </span>
+            <h3 className="text-2xl font-bold text-white drop-shadow-md">{event.title}</h3>
+            <div className="flex items-center gap-2 mt-2 text-white/90 font-medium text-sm drop-shadow-md">
+              <Calendar className="w-4 h-4" />
+              <span>{event.date}</span>
+            </div>
           </div>
         </div>
 
@@ -132,15 +137,20 @@ export default function EventsSection({ isDark, searchQuery }: Props) {
               style={{ animationDelay: `${idx * 0.1}s` }}
               onClick={() => setSelected(event)}
             >
-              <div className={`bg-gradient-to-r ${event.bgGradient} p-6`}>
-                <span className={`text-xs font-bold px-3 py-1 rounded-full bg-white/20 text-white`}>
-                  {event.category}
-                </span>
-                <div className="flex items-center gap-2 mt-4 text-white/70 text-sm">
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>{event.date}</span>
+              <div className={`bg-gradient-to-r ${event.bgGradient} p-6 relative overflow-hidden group`}>
+                {event.image && (
+                  <img src={event.image} alt={event.title} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay transition-transform duration-700 group-hover:scale-110" />
+                )}
+                <div className="relative z-10">
+                  <span className={`text-xs font-bold px-3 py-1 rounded-full bg-white/20 text-white`}>
+                    {event.category}
+                  </span>
+                  <div className="flex items-center gap-2 mt-4 text-white/90 text-sm font-medium drop-shadow-sm">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>{event.date}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mt-2 drop-shadow-md">{event.title}</h3>
                 </div>
-                <h3 className="text-xl font-bold text-white mt-2">{event.title}</h3>
               </div>
 
               <div className="p-5">

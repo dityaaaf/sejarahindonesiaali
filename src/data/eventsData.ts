@@ -1,3 +1,9 @@
+import proklamasiImg from '../assets/image/proklamasi.png';
+import rengasdengklokImg from '../assets/image/rengasdengklok.png';
+import sumpahPemudaImg from '../assets/image/sumpahpemuda.png';
+import g30Img from '../assets/image/g30.png';
+import reformasiImg from '../assets/reformasi.png';
+
 export interface HistoricalEvent {
   id: string;
   title: string;
@@ -8,6 +14,7 @@ export interface HistoricalEvent {
   impact: string[];
   figures: string[];
   bgGradient: string;
+  image?: string;
 }
 
 export const eventsData: HistoricalEvent[] = [
@@ -35,6 +42,7 @@ export const eventsData: HistoricalEvent[] = [
     ],
     figures: ['Soekarno', 'Mohammad Hatta', 'Latief Hendraningrat', 'Sukarni'],
     bgGradient: 'from-red-900 to-red-700',
+    image: proklamasiImg,
   },
   {
     id: 'rengasdengklok',
@@ -58,6 +66,7 @@ export const eventsData: HistoricalEvent[] = [
     ],
     figures: ['Soekarno', 'Mohammad Hatta', 'Sukarni', 'Chairul Saleh', 'Ahmad Subarjo'],
     bgGradient: 'from-orange-900 to-orange-700',
+    image: rengasdengklokImg,
   },
   {
     id: 'sumpah-pemuda',
@@ -81,6 +90,7 @@ export const eventsData: HistoricalEvent[] = [
     ],
     figures: ['W.R. Supratman', 'Sugondo Djojopuspito', 'Muhammad Yamin'],
     bgGradient: 'from-blue-900 to-blue-700',
+    image: sumpahPemudaImg,
   },
   {
     id: 'g30s',
@@ -105,6 +115,7 @@ export const eventsData: HistoricalEvent[] = [
     ],
     figures: ['Soeharto', 'Soekarno', 'Letkol Untung', 'Jenderal Ahmad Yani'],
     bgGradient: 'from-gray-900 to-gray-700',
+    image: g30Img,
   },
   {
     id: 'reformasi',
@@ -129,5 +140,6 @@ export const eventsData: HistoricalEvent[] = [
     ],
     figures: ['Soeharto', 'B.J. Habibie', 'Amien Rais', 'Megawati'],
     bgGradient: 'from-teal-900 to-teal-700',
+    image: reformasiImg,
   },
 ];

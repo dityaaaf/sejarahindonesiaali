@@ -9,6 +9,7 @@ import FunFacts from './components/FunFacts';
 import ModernSection from './components/ModernSection';
 import QuizSection from './components/QuizSection';
 import Footer from './components/Footer';
+import Chatbot from './components/Chatbot';
 
 const SECTIONS = ['beranda', 'timeline', 'tokoh', 'peristiwa', 'bukti', 'modern', 'quiz'];
 
@@ -77,6 +78,7 @@ function App() {
       </main>
 
       <Footer isDark={isDark} />
+      <Chatbot isDark={isDark} />
     </div>
   );
 }

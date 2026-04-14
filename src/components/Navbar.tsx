@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Search, Moon, Sun, Menu, X, BookOpen } from 'lucide-react';
+import { Search, Moon, Sun, Menu, X } from 'lucide-react';
+import logoImg from '../assets/indonesialogo.png';
 
 interface NavbarProps {
   isDark: boolean;
@@ -57,14 +58,18 @@ export default function Navbar({ isDark, onToggleDark, activeSection, onSearch }
             onClick={() => scrollTo('beranda')}
             className="flex items-center gap-2 group"
           >
-            <div className="w-9 h-9 bg-red-600 rounded-lg flex items-center justify-center shadow-md group-hover:bg-red-700 transition-colors">
-              <BookOpen className="w-5 h-5 text-white" />
+            <div className={`w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-105 ${isDark ? 'bg-white/10 p-1 rounded-md' : ''}`}>
+              <img 
+                src={logoImg} 
+                alt="Logo Sejarah Indonesia" 
+                className="w-full h-full object-contain"
+              />
             </div>
-            <div className="hidden sm:block">
-              <span className={`font-bold text-lg leading-none block ${scrolled || menuOpen ? (isDark ? 'text-white' : 'text-gray-900') : 'text-white'}`}>
+            <div className="hidden sm:flex items-center gap-1.5">
+              <span className={`font-bold text-lg leading-none ${scrolled || menuOpen ? (isDark ? 'text-white' : 'text-gray-900') : 'text-white'}`}>
                 Sejarah
               </span>
-              <span className="text-red-500 text-xs font-semibold tracking-widest uppercase">
+              <span className="text-red-600 font-bold text-lg leading-none">
                 Indonesia
               </span>
             </div>
