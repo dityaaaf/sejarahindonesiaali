@@ -15,7 +15,7 @@ const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
 
 const SYSTEM_PROMPT = `Anda adalah seorang asisten AI yang ahli mengenai Sejarah Indonesia bernama "Aksa". 
 Tujuan Anda adalah membantu pengguna belajar dan memahami kejadian penting, pahlawan, budaya, dan berbagai hal tentang sejarah bangsa Indonesia.
-Jawab dengan informatif, antusias, sopan, dan dalam bahasa Indonesia. Selalu berikan jawaban yang singkat, padat, dan langsung ke intinya (maksimal 2-3 paragraf pendek). JANGAN memberikan jawaban yang sangat panjang. Jika ada pertanyaan yang sangat menyimpang atau di luar topik Sejarah,
+Jawab dengan informatif, antusias, sopan, dan dalam bahasa Indonesia. Jika ada pertanyaan yang sangat menyimpang atau di luar topik Sejarah,
 tolong ingatkan pengguna untuk kembali ke topik sejarah Indonesia. Jangan menjelaskan ini pada setiap respons, langsung saja bekerja sesuai instruksi.`;
 
 const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
@@ -37,11 +37,11 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
 
   const handleSend = async () => {
     if (!input.trim()) return;
-    
+
     if (!API_KEY || API_KEY === 'your_api_key_here') {
       setMessages(prev => [
-        ...prev, 
-        { role: 'user', content: input }, 
+        ...prev,
+        { role: 'user', content: input },
         { role: 'model', content: 'Mohon maaf, API Key Google Gemini belum diatur di file `.env`. Silakan tambahkan `VITE_GEMINI_API_KEY` terlebih dahulu.' }
       ]);
       setInput('');
@@ -58,7 +58,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
         role: m.role,
         parts: [{ text: m.content }]
       }));
-      
+
       let finalUserMessage = userMessage;
       if (messages.length === 1) {
         finalUserMessage = `[Instruksi Sistem: ${SYSTEM_PROMPT}]\n\nPertanyaan: ${userMessage}`;
@@ -76,10 +76,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
           'x-goog-api-key': API_KEY
         },
         body: JSON.stringify({
-          contents: historyContents,
-          generationConfig: {
-            maxOutputTokens: 350
-          }
+          contents: historyContents
         })
       });
 
@@ -94,7 +91,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
     } catch (error) {
       console.error("Gemini API Error:", error);
       setMessages(prev => [
-        ...prev, 
+        ...prev,
         { role: 'model', content: 'Maaf, terjadi kesalahan saat menghubungi AI. Pastikan layanan API berfungsi dengan baik.' }
       ]);
     } finally {
@@ -112,10 +109,9 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       {/* Chat Window */}
       {isOpen && (
-        <div 
-          className={`mb-4 w-[350px] max-w-[calc(100vw-3rem)] h-[500px] max-h-[80vh] flex flex-col rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 transform origin-bottom-right ${
-            isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'
-          } border`}
+        <div
+          className={`mb-4 w-[350px] max-w-[calc(100vw-3rem)] h-[500px] max-h-[80vh] flex flex-col rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 transform origin-bottom-right ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'
+            } border`}
         >
           {/* Header */}
           <div className="flex items-center justify-between p-4 bg-gradient-to-r from-red-600 to-red-700 text-white shadow-md">
@@ -123,7 +119,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
               <MessageSquare className="w-5 h-5" />
               <h3 className="font-semibold text-sm">Aksa - Asisten Sejarah</h3>
             </div>
-            <button 
+            <button
               onClick={() => setIsOpen(false)}
               className="p-1 hover:bg-white/20 rounded-full transition-colors"
             >
@@ -134,18 +130,17 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
           {/* Messages Area */}
           <div className={`flex-1 overflow-y-auto p-4 space-y-4 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
             {messages.map((message, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div 
-                  className={`max-w-[85%] rounded-2xl px-4 py-2 ${
-                    message.role === 'user' 
-                      ? 'bg-red-600 text-white rounded-br-none' 
-                      : isDark 
-                        ? 'bg-gray-800 text-gray-200 rounded-bl-none' 
-                        : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none shadow-sm'
-                  }`}
+                <div
+                  className={`max-w-[85%] rounded-2xl px-4 py-2 ${message.role === 'user'
+                    ? 'bg-red-600 text-white rounded-br-none'
+                    : isDark
+                      ? 'bg-gray-800 text-gray-200 rounded-bl-none'
+                      : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none shadow-sm'
+                    }`}
                 >
                   {message.role === 'model' ? (
                     <div className="prose prose-sm dark:prose-invert max-w-none text-sm break-words">
@@ -179,14 +174,13 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
                 className={`flex-1 bg-transparent border-none focus:outline-none text-sm ${isDark ? 'text-white placeholder-gray-400' : 'text-gray-800 placeholder-gray-500'}`}
                 disabled={isLoading}
               />
-              <button 
+              <button
                 onClick={handleSend}
                 disabled={isLoading || !input.trim()}
-                className={`p-1.5 rounded-full transition-colors flex-shrink-0 ${
-                  input.trim() && !isLoading 
-                    ? 'bg-red-600 text-white hover:bg-red-700' 
-                    : 'bg-gray-200 text-gray-400 dark:bg-gray-800 dark:text-gray-600'
-                }`}
+                className={`p-1.5 rounded-full transition-colors flex-shrink-0 ${input.trim() && !isLoading
+                  ? 'bg-red-600 text-white hover:bg-red-700'
+                  : 'bg-gray-200 text-gray-400 dark:bg-gray-800 dark:text-gray-600'
+                  }`}
               >
                 <Send className="w-4 h-4" />
               </button>
@@ -198,9 +192,8 @@ const Chatbot: React.FC<ChatbotProps> = ({ isDark }) => {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`${
-          isOpen ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
-        } w-14 h-14 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110 active:scale-95`}
+        className={`${isOpen ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
+          } w-14 h-14 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110 active:scale-95`}
       >
         <MessageSquare className="w-6 h-6" />
       </button>
